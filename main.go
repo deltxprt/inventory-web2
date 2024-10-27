@@ -295,13 +295,15 @@ func main() {
 	app := &application{
 		db: db,
 	}
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
+
 	r.GET("/inventory", app.getInventory)
 	r.GET("/inventory/:id", app.getServer)
 	r.POST("/inventory", app.addServer)
 	r.PUT("/inventory/:id", app.updateServer)
 	r.DELETE("/inventory/:id", app.deleteServer)
-	err = r.Run("127.0.0.1:8080")
+	err = r.Run(":8080")
 	if err != nil {
 		return
 	}
